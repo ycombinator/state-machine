@@ -1,0 +1,21 @@
+{
+  "name": "state-machine",
+  "version": "0.0.1",
+  "private": false,
+  "dependencies": {
+    "async": "0.2.7",
+    "config": "0.4.22",
+    "date-utils": "1.2.12",
+    "db-migrate": "0.4.1",
+    "pg": "1.0.0",
+    "requireindex": "1.0.0",
+    "restify": "2.3.5",
+    "sequelize": "1.6.0",
+    "sprintf": "0.1.1"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "license": "MIT"
+}
