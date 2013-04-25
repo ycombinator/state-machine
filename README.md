@@ -69,12 +69,12 @@ The service is currently provided as a REST API.
 
     {
       "links": {
-        "self": "{baseuri}/v1/state-machine/2345/state/foo",
+        "self": "{baseuri}/v1/state-machine/2345/state/1",
         "state-machine": "{baseuri}/v1/state-machine/2345"
       },
-     "state": {
-      "name": "foo"
-     }
+      "state": {
+        "name": "foo"
+      }
     }
 
 #### State machine input
@@ -100,11 +100,11 @@ The service is currently provided as a REST API.
 
     {
       "links": {
-        "self": "{baseuri}/v1/state-machine/2345/state/baz",
+        "self": "{baseuri}/v1/state-machine/2345/state/3",
         "state-machine": "{baseuri}/v1/state-machine/2345"
       },
-     "state": {
-      "name": "baz"
-     }
+      "state": {
+        "name": "baz"
+      }
     }
 
