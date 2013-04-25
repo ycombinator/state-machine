@@ -63,6 +63,7 @@ The service is currently provided as a REST API.
     303 See Other
     Location: {baseuri}/v1/state-machine/2345/state/1
 
+###### ... after redirection ...
 
     200 OK
 
@@ -93,6 +94,7 @@ The service is currently provided as a REST API.
     303 See Other
     Location: {baseuri}/v1/state-machine/2345/state/3
 
+###### ... after redirection ...
 
     200 OK
 
