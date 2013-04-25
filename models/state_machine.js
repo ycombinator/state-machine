@@ -3,9 +3,8 @@ var sequelize = require('sequelize'),
     State = require('./state.js')
 
 var StateMachine = db.define('state_machines', {
+  current_state_id: sequelize.INTEGER
 })
-
-StateMachine.hasOne(State, { foreignKey: 'current_state_id' })
 
 StateMachine.hasMany(State)
 State.belongsTo(StateMachine)

@@ -8,18 +8,18 @@ var validateRequest = function(req, cb) {
   try {
     body = JSON.parse(req.body)
   } catch (err) {
-    cb(err)
+    cb({code: 400, message: err})
   }
 
   // Ensure 'states' property is present
   if (!body.hasOwnProperty('states')) {
-    cb('Missing top-level property \'states\'')
+    cb({code: 400, message: 'Missing top-level property \'states\''})
   }
   var states = body.states
 
   // Ensure 'initialState' property is present
   if (!body.hasOwnProperty('initialState')) {
-    cb('Missing top-level property \'initalState\'')
+    cb({code: 400, message: 'Missing top-level property \'initalState\''})
   }
   var initialState = body.initialState
 
@@ -33,12 +33,12 @@ var validateRequest = function(req, cb) {
 
         // Ensure transition has 'input' property present
         if (!transition.hasOwnProperty('input')) {
-          cb('Missing transition property \'input\'')
+          cb({code: 400, message: 'Missing transition property \'input\''})
         }
 
         // Ensure transition has 'newState' property present
         if (!transition.hasOwnProperty('newState')) {
-          cb('Missing transition property \'newState\'')
+          cb({code: 400, message: 'Missing transition property \'newState\''})
         }
 
       } // END for - transitions
@@ -49,7 +49,7 @@ var validateRequest = function(req, cb) {
 
   // Ensure that initial state is one of the defined states
   if (!states.hasOwnProperty(initialState)) {
-    cb('Initial state is not one of the defined state')
+    cb({code: 400, message: 'Initial state is not one of the defined state'})
   }
 
   for (var state in states) {
@@ -62,7 +62,7 @@ var validateRequest = function(req, cb) {
 
       // Ensure transition state is one of the defined states
       if (!states.hasOwnProperty(transitionState)) {
-        cb('Transition state for state \'' + state + '\' and input \'' + input + '\' not found')
+        cb({code: 400, message: 'Transition state for state \'' + state + '\' and input \'' + input + '\' not found'})
       }
 
     } // END for - transitions
@@ -80,6 +80,24 @@ var persistStateMachine = function(stateMachine, cb) {
     .error(cb)
 
 } // END function - persistStateMachine
+
+var persistInitialState = function(stateMachine, dbStateMachine, cb) {
+
+  var initialState = stateMachine.initialState
+
+  models.state.find({ where: { name: initialState }})
+    .success(function(state) {
+      dbStateMachine.current_state_id = state.id
+      dbStateMachine.save()
+        .success(function(dbsm) {
+          console.log(dbsm.current_state_id)
+          cb(null, stateMachine, dbsm)
+        })
+        .error(cb)
+    })
+    .error(cb)
+
+} // END function - persistInitialState
 
 var persistStates = function(stateMachine, dbStateMachine, cb) {
 
@@ -120,7 +138,7 @@ var persistTransitions = function(stateMachine, dbStateMachine, cb) {
           async.each(
             state.transitions,
             function(transition) {
-                            
+              
               models.state.find({ where: { name: transition.nextState, state_machine_id: dbStateMachine.id }})
                 .success(function(dbNextState) {
                   
@@ -138,7 +156,7 @@ var persistTransitions = function(stateMachine, dbStateMachine, cb) {
             }
           )
             
-        })
+            })
         .error(callback)
       
     },
@@ -151,7 +169,7 @@ var persistTransitions = function(stateMachine, dbStateMachine, cb) {
     }
   ) // END each  
 
-} // END function - persistTransitions
+    } // END function - persistTransitions
 
 var makeStateMachineUri = function(stateMachine, dbStateMachine, cb) {
 
@@ -165,11 +183,12 @@ exports.post = function(req, res) {
     function(cb) { validateRequest(req, cb) },
     persistStateMachine,
     persistStates,
+    persistInitialState,
     persistTransitions,
     makeStateMachineUri
   ], function(err, stateMachineUri) {
     if (err) {
-      res.send(400, err)
+      res.send(err.code || 500, err.message || err.toString())
     }
     res.setHeader('Location', stateMachineUri)
     res.send(201, { meta: { links: { self: stateMachineUri } } } )
