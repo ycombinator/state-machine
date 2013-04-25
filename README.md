@@ -45,8 +45,10 @@ The service is currently provided as a REST API.
     Location: {baseuri}/v1/state-machine/2345
 
     {
-      "links": {
-        "self": "{baseuri}/v1/state-machine/2345"
+      "meta": {
+        "links": {
+          "self": "{baseuri}/v1/state-machine/2345"
+        }
       }
     }
 
@@ -68,9 +70,11 @@ The service is currently provided as a REST API.
     200 OK
 
     {
-      "links": {
-        "self": "{baseuri}/v1/state-machine/2345/state/1",
-        "state-machine": "{baseuri}/v1/state-machine/2345"
+      "meta": {
+        "links": {
+          "self": "{baseuri}/v1/state-machine/2345/state/1",
+          "state-machine": "{baseuri}/v1/state-machine/2345"
+        }
       },
       "state": {
         "name": "foo"
