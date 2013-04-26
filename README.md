@@ -125,3 +125,51 @@ URIs in the rest of this document start with `{baseuri}`. This is a placeholder 
       }
     }
 
+# Development Setup (on Mac OS X 10.8)
+
+### First-time setup
+
+1) Download and install [Node.js](http://nodejs.org/).
+
+2) Download, install and start [PostgreSQL server](http://postgresapp.com/).
+
+3) Clone this repository to a folder on your computer. The rest of this document will refer to this folder as `$PROJECT_ROOT`.
+
+4) Install project dependencies.
+
+    cd $PROJECT_ROOT
+    npm install
+
+5) Create the database user. When prompted, enter the password as defined in the [`config/default.js`](https://github.com/ycombinator/statemachine/blob/master/config/default.js) file.
+
+    createuser statemachine -P
+
+6) Create the database and make the just-created user its owner.
+
+    createdb statemachine -O statemachine
+
+7) Create the database schema.
+
+    cd $PROJECT_ROOT
+    node bin/update_db_schema.js
+
+### Every time you sync $PROJECT_ROOT with the remote GitHub repo
+
+1) Update the project dependencies.
+
+    cd $PROJECT_ROOT
+    npm install
+
+2) Update the database schema.
+
+    cd $PROJECT_ROOT
+    node bin/update_db_schema.js
+
+### To start the REST API server
+
+1) Start the REST API server.
+
+    cd $PROJECT_ROOT
+    node restapi/server.js
+
+

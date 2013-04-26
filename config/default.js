@@ -11,7 +11,7 @@ module.exports = {
     dialect: matches[1] || 'postgres',
     name: matches[6] || 'statemachine',
     username: matches[2] || 'statemachine',
-    password: matches[3] || '',
+    password: matches[3] || 'statemachine',
     host: matches[4] || 'localhost',
     port: matches[5] || 5432,
     logging: console.log
