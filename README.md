@@ -28,8 +28,8 @@ The service is currently provided as a REST API.
       "states": {
         "foo": {
           "transitions": [
-            { "input": "/1/","nextState": "bar" },
-            { "input": "/2/","nextState": "baz" }
+            { "input": "1|2|[a-bA-B]","nextState": "bar" },
+            { "input": "3","nextState": "baz" }
           ]
         },
         "bar": {
