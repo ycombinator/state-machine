@@ -6,7 +6,7 @@ For instance, consider a user registration process. When the application creates
 
 Applications with such needs often end up implementing a state machine to manage the process flow. This service aims to save applications from that implementation effort.
 
-Using this service such applications need only define the state machine that reflects the process flow and then tell the service each time a input is made to the process. The service will take care of properly transitioning to the next state in the flow and return that state to the application. The application may also, at any time, ask the service for the current state of a state machine it created.
+Using this service such applications need only define the state machine that reflects the process flow and then tell the service each time a input is made to the process. The service will take care of properly transitioning to the next state in the flow and return that state to the application. The application may also, at any time, ask the service for the current state of a state machine it created. Furthermore, applications may store arbitrary data along with each state.
 
 # Usage
 The service is currently provided as a REST API. 
