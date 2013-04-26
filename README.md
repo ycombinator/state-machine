@@ -150,7 +150,6 @@ URIs in the rest of this document start with `{baseuri}`. This is a placeholder 
 
 7) Create the database schema.
 
-    cd $PROJECT_ROOT
     node bin/update_db_schema.js
 
 ### Every time you sync $PROJECT_ROOT with the remote GitHub repo
@@ -162,7 +161,6 @@ URIs in the rest of this document start with `{baseuri}`. This is a placeholder 
 
 2) Update the database schema.
 
-    cd $PROJECT_ROOT
     node bin/update_db_schema.js
 
 ### To start the REST API server
