@@ -170,4 +170,6 @@ URIs in the rest of this document start with `{baseuri}`. This is a placeholder 
     cd $PROJECT_ROOT
     node restapi/server.js
 
-
+# Coming Soon
+* Language bindings in Node.js, Python and Ruby.
+* TCP socket protocol as alternative to REST.
