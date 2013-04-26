@@ -140,7 +140,7 @@ URIs in the rest of this document start with `{baseuri}`. This is a placeholder 
     cd $PROJECT_ROOT
     npm install
 
-5) Create the database user. When prompted, enter the password as defined in the [`config/default.js`](https://github.com/ycombinator/statemachine/blob/master/config/default.js) file.
+5) Create the database user. When prompted, enter the password as defined in the [`config/default.js`](https://github.com/ycombinator/state-machine/blob/master/config/default.js) file.
 
     createuser statemachine -P
 
