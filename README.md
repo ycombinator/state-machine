@@ -171,5 +171,6 @@ URIs in the rest of this document start with `{baseuri}`. This is a placeholder 
     node restapi/server.js
 
 # Coming Soon
+* Ability to specify input matchers in forms other than regular expressions.
 * Language bindings in Node.js, Python and Ruby.
 * TCP socket protocol as alternative to REST.
