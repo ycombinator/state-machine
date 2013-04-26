@@ -30,7 +30,7 @@ URIs in the rest of this document start with `{baseuri}`. This is a placeholder 
 
 ###### Request
 
-```
+```json
 POST {baseuri}/v1/state-machines
 
 {
