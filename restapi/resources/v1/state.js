@@ -20,7 +20,7 @@ var validateRequest = function(req, cb) {
 
 var makeStateBody = function(dbState, cb) {
 
-  cb(null, {
+  var body = {
     meta: {
       links: {
         self: config.restapi.baseuri + '/v1/state/' + dbState.id,
@@ -30,7 +30,13 @@ var makeStateBody = function(dbState, cb) {
     state: {
       name: dbState.name
     }
-  })
+  }
+
+  if (dbState.data) {
+    body.state.data = dbState.data
+  }
+
+  cb(null, body)
 
 } // END function - makeStateUri
 

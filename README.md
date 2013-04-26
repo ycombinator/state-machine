@@ -33,9 +33,12 @@ The service is currently provided as a REST API.
           ]
         },
         "bar": {
+          "data": "data for state bar",
           "transitions": []
         },
-        "baz": {}
+        "baz": {
+          "data": "data for state baz"
+        }
       }
     }
 
@@ -108,7 +111,8 @@ The service is currently provided as a REST API.
         "state-machine": "{baseuri}/v1/state-machine/2345"
       },
       "state": {
-        "name": "baz"
+        "name": "baz",
+        "data": "data for state baz"
       }
     }
 
