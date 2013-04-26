@@ -33,7 +33,6 @@ URIs in the rest of this document start with `{baseuri}`. This is a placeholder 
 ```
 POST {baseuri}/v1/state-machines
 ```
-
 ```json
 {
   "initialState": "foo",
