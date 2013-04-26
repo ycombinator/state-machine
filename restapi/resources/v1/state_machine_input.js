@@ -51,7 +51,7 @@ var processInput = function(dbStateMachine, dbState, input, cb) {
         transitions,
         function(dbTransition, callback) {
 
-          var matches = input.match(new RegExp(dbTransition.input))
+          var matches = input.match(new RegExp(dbTransition.match))
           if (matches) {
             dbTransition.getNextState()
               .success(function(dbns) { dbNextState = dbns; callback(true) })
@@ -80,7 +80,7 @@ var updateCurrentState = function(dbStateMachine, dbState, cb) {
   dbStateMachine.current_state_id = dbState.id
   dbStateMachine.save()
     .success(function() { cb(null, dbState) })
-    .error(function(err) { console.error(err); cb(err) })
+    .error(cb)
 
 } // END function - updateCurrentState
 

@@ -3,7 +3,7 @@ var sequelize = require('sequelize'),
     State = require('./state.js')
 
 var Transition = db.define('transitions', {
-  input: { type: sequelize.STRING, notNull: true }
+  match: { type: sequelize.STRING, notNull: true }
 })
 
 Transition.belongsTo(State, { as: 'State', foreignKey: 'state_id' })

@@ -37,8 +37,8 @@ URIs in the rest of this document start with `{baseuri}`. This is a placeholder 
       "states": {
         "foo": {
           "transitions": [
-            { "input": "1|2|[a-bA-B]","nextState": "bar" },
-            { "input": "3","nextState": "baz" }
+            { "match": "1|2|[a-bA-B]","nextState": "bar" },
+            { "match": "3","nextState": "baz" }
           ]
         },
         "bar": {
@@ -95,7 +95,7 @@ URIs in the rest of this document start with `{baseuri}`. This is a placeholder 
 
 #### State machine input
 
-##### Inform the state machine of an input
+##### Provide input to the state machine
 
 ###### Request
 

@@ -23,22 +23,24 @@ var validateRequest = function(req, cb) {
   }
   var initialState = body.initialState
 
-  for (var state in states) {
-    
+  for (var stateName in states) {
+
+    var state = states[stateName]
+
     if (state.hasOwnProperty('transitions') && (state.transitions instanceof Array)) {
       
-      for (var tid in transitions) {
+      for (var tid in state.transitions) {
 
-        var transition = transitions[tid]
+        var transition = state.transitions[tid]
 
-        // Ensure transition has 'input' property present
-        if (!transition.hasOwnProperty('input')) {
-          cb({code: 400, message: 'Missing transition property \'input\''})
+        // Ensure transition has 'match' property present
+        if (!transition.hasOwnProperty('match')) {
+          cb({code: 400, message: 'Missing transition property \'match\''})
         }
 
-        // Ensure transition has 'newState' property present
-        if (!transition.hasOwnProperty('newState')) {
-          cb({code: 400, message: 'Missing transition property \'newState\''})
+        // Ensure transition has 'nextState' property present
+        if (!transition.hasOwnProperty('nextState')) {
+          cb({code: 400, message: 'Missing transition property \'nextState\''})
         }
 
       } // END for - transitions
@@ -57,12 +59,12 @@ var validateRequest = function(req, cb) {
     for (var tid in state.transitions) {
 
       var transition = state.transitions[tid]
-      var input = transition.input
-      var transitionState = transition.newState
+      var match = transition.match
+      var transitionState = transition.nextState
 
       // Ensure transition state is one of the defined states
       if (!states.hasOwnProperty(transitionState)) {
-        cb({code: 400, message: 'Transition state for state \'' + state + '\' and input \'' + input + '\' not found'})
+        cb({code: 400, message: 'Transition state for state \'' + state + '\' and match \'' + match + '\' not found'})
       }
 
     } // END for - transitions
@@ -90,7 +92,6 @@ var persistInitialState = function(stateMachine, dbStateMachine, cb) {
       dbStateMachine.current_state_id = state.id
       dbStateMachine.save()
         .success(function(dbsm) {
-          console.log(dbsm.current_state_id)
           cb(null, stateMachine, dbsm)
         })
         .error(cb)
@@ -144,7 +145,7 @@ var persistTransitions = function(stateMachine, dbStateMachine, cb) {
                   
                   models.transition.create({
                     state_id: dbState.id,
-                    input: transition.input,
+                    match: transition.match,
                     next_state_id: dbNextState.id
                   })
                     .success(function(t) { callback() })
