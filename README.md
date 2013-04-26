@@ -30,26 +30,28 @@ URIs in the rest of this document start with `{baseuri}`. This is a placeholder 
 
 ###### Request
 
-    POST {baseuri}/v1/state-machines
+```
+POST {baseuri}/v1/state-machines
 
-    {
-      "initialState": "foo",
-      "states": {
-        "foo": {
-          "transitions": [
-            { "match": "1|2|[a-bA-B]","nextState": "bar" },
-            { "match": "3","nextState": "baz" }
-          ]
-        },
-        "bar": {
-          "data": "data for state bar",
-          "transitions": []
-        },
-        "baz": {
-          "data": "data for state baz"
-        }
-      }
+{
+  "initialState": "foo",
+  "states": {
+    "foo": {
+      "transitions": [
+        { "match": "1|2|[a-bA-B]","nextState": "bar" },
+        { "match": "3","nextState": "baz" }
+      ]
+    },
+    "bar": {
+      "data": "data for state bar",
+      "transitions": []
+    },
+    "baz": {
+      "data": "data for state baz"
     }
+  }
+}
+```
 
 ###### Response (upon successful creation)
 
