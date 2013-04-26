@@ -16,6 +16,7 @@ server.use(restify.fullResponse())
 server.post('/v1/state-machines', resources.v1.state_machines.post)
 server.get('/v1/state-machine/:id/current-state', resources.v1.state_machine_current_state.get)
 server.get('/v1/state/:id', resources.v1.state.get)
+server.post('/v1/state-machine/:id/input', resources.v1.state_machine_input.post)
 
 // Start server
 server.listen(config.restapi.port, function() {
