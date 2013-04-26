@@ -56,16 +56,19 @@ POST {baseuri}/v1/state-machines
 
 ###### Response (upon successful creation)
 
-    201 Created
-    Location: {baseuri}/v1/state-machine/2345
-
-    {
-      "meta": {
-        "links": {
-          "self": "{baseuri}/v1/state-machine/2345"
-        }
-      }
+```
+201 Created
+Location: {baseuri}/v1/state-machine/2345
+```
+```json
+{
+  "meta": {
+    "links": {
+      "self": "{baseuri}/v1/state-machine/2345"
     }
+  }
+}
+```
 
 #### State machine current state
 
@@ -73,28 +76,35 @@ POST {baseuri}/v1/state-machines
 
 ###### Request
 
-    GET {baseuri}/v1/state-machine/2345/current-state
+```
+GET {baseuri}/v1/state-machine/2345/current-state
+```
 
 ###### Response
 
-    303 See Other
-    Location: {baseuri}/v1/state-machine/2345/state/1
+```
+303 See Other
+Location: {baseuri}/v1/state-machine/2345/state/1
+```
 
 ###### ... after redirection ...
 
-    200 OK
-
-    {
-      "meta": {
-        "links": {
-          "self": "{baseuri}/v1/state-machine/2345/state/1",
-          "state-machine": "{baseuri}/v1/state-machine/2345"
-        }
-      },
-      "state": {
-        "name": "foo"
-      }
+```
+200 OK
+```
+```json
+{
+  "meta": {
+    "links": {
+      "self": "{baseuri}/v1/state-machine/2345/state/1",
+      "state-machine": "{baseuri}/v1/state-machine/2345"
     }
+  },
+  "state": {
+    "name": "foo"
+  }
+}
+```
 
 #### State machine input
 
@@ -102,31 +112,39 @@ POST {baseuri}/v1/state-machines
 
 ###### Request
 
-    POST {baseuri}/v1/state-machine/2345/input
-
-    {
-      "input": "2"
-    }
+```
+POST {baseuri}/v1/state-machine/2345/input
+```
+```json
+{
+  "input": "2"
+}
+```
 
 ###### Response (upon successful transition)
 
-    303 See Other
-    Location: {baseuri}/v1/state-machine/2345/state/3
+```
+303 See Other
+Location: {baseuri}/v1/state-machine/2345/state/3
+```
 
 ###### ... after redirection ...
 
-    200 OK
-
-    {
-      "links": {
-        "self": "{baseuri}/v1/state-machine/2345/state/3",
-        "state-machine": "{baseuri}/v1/state-machine/2345"
-      },
-      "state": {
-        "name": "baz",
-        "data": "data for state baz"
-      }
-    }
+```
+200 OK
+```
+```json
+{
+  "links": {
+    "self": "{baseuri}/v1/state-machine/2345/state/3",
+    "state-machine": "{baseuri}/v1/state-machine/2345"
+  },
+  "state": {
+    "name": "baz",
+    "data": "data for state baz"
+  }
+}
+```
 
 # Development Setup (on Mac OS X 10.8)
 
