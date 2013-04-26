@@ -13,6 +13,15 @@ The service is currently provided as a REST API.
 
 ## REST API
 
+### Base URIs
+URIs in the rest of this document start with `{baseuri}`. This is a placeholder that should be replaced with one of the URIs below, depending on the environment:
+
+| Environment           | `{baseuri}`                                  |
+| --------------------- | -------------------------------------------- |
+| Production            | `http://state-machine.herokuapp.com`         |
+| Staging (coming soon) | `http://state-machine-staging.herokuapp.com` |
+| Development           | `http://localhost:8080`                      |
+
 ### Resources
 
 #### State Machines
